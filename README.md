@@ -31,7 +31,7 @@ The default recipe will install vmware-tools from source downloaded from a web s
 
 ##### Example Role:
 
-```json
+```ruby
 name "vmware-tools_role"
 description "vmware-tools install"
 run_list [
@@ -51,7 +51,7 @@ This recipe will install vmware-tools from VMWare's yum repo.  Do not include th
 
 ##### Example Role:
 
-```json
+```ruby
 name "vmware-tools-rpm_role"
 description "vmware-tools rpm install"
 run_list [
