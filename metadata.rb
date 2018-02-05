@@ -1,9 +1,19 @@
 name             'vmware-tools'
-maintainer       'https://github.com/andrewfraley'
-maintainer_email 'andrew.fraley@gmail.com'
-license          'MIT'
+maintainer       'JJ Asghar'
+maintainer_email 'jj@chef.io'
+license          'Apache 2'
 description      'Installs/Configures vmware-tools'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.9.0'
-depends			 "ark"	# you can omit this if not installing via source
-depends			 "yum"	# you can omit this if not installing via rpm
+version          '1.0.0'
+
+depends        'apt'
+depends	       'yum'
+
+chef_version '>= 13'
+
+%w(ubuntu debian redhat centos suse opensuse).each do |os|
+  supports os
+end
+
+issues_url 'https://github.com/jjasghar/chef-vmware-tools/issues'
+source_url 'https://github.com/jjasghar/chef-vmware-tools'

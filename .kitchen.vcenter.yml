@@ -1,0 +1,47 @@
+---
+driver:
+  name: vcenter
+  vcenter_username: 'administrator@vsphere.local'
+  vcenter_password: <%= ENV['VCENTER_PASSWORD'] %>
+  vcenter_host: <%= ENV['VCENTER_HOST'] %>
+  vcenter_disable_ssl_verify: true
+
+provisioner:
+  name: chef_zero
+  sudo_command: sudo
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-1604
+    driver_config:
+      targethost: 172.16.20.42
+      template: ubuntu16-tmpl
+      datacenter: "Datacenter"
+    transport:
+      username: "admini"
+      password: admini
+
+  - name: centos-7
+    driver_config:
+      targethost: 172.16.20.42
+      template: centos7-tmpl
+      datacenter: "Datacenter"
+    transport:
+      username: "root"
+      password: admini
+
+  - name: windows2012R2
+    driver_config:
+      targethost: 172.16.20.42
+      template: windows2012R2-tmpl
+      datacenter: "Datacenter"
+    transport:
+      username: "Administrator"
+      password: "Admini@"
+
+suites:
+  - name: default
+    run_list:
+      - recipe[vmware-tools::default]
