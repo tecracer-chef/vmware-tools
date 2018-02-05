@@ -1,4 +1,4 @@
-name             'vmware-tools'
+name             'vmwaretools'
 maintainer       'JJ Asghar'
 maintainer_email 'jj@chef.io'
 license          'Apache 2'
