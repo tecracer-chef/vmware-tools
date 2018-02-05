@@ -1,78 +1,45 @@
-vmware-tools Cookbook
-=====================
-Chef cookbook for installing vmware tools.  Currently supports installation from source (default) or from VMWare's yum repo 
+# vmware-tools Cookbook
 
+## Scope
 
-Requirements
-------------
-- If you're going to install from source, you'll need the minimum requirements to build vmware tools. On a RHEL or CentOS system, you'll need: make gcc kernel-devel kernel-headers glibc-headers perl
+Chef cookbook for installing [VMware tools](https://docs.vmware.com/en/VMware-Tools/index.html).
 
-- This has only been tested on RHEL6, but should probably work on Debian/Ubuntu if building from source.  On Ubuntu you'll need build-essential.
+## Attributes
 
-Attributes
-----------
-#### Source Install (default)
-* `node['vmware-tools']['url']` - URL to download the source tarball.  No default.
-* `node['vmware-tools']['version']` - Version of VMWare tools you're installing, e.g. "9.4.0".  Used to prevent installing over automatically upgraded versions.
-* `node['vmware-tools']['upgrade_only']` - When set to true (default), only install the specified version if it's newer than the installed version
-* `node['vmware-tools']['src_path']` - Path to store the vmware-tools source.  Default: /usr/local/src
+`default['vmware-tools']['url']` - The location to get the Windows VMware-Tools executable from.
+`default['vmware-tools']['version']` - The version of the Windows VMware-Tool.
 
+## Usage
 
-#### RPM Install
-* `node['vmware-tools']['graphical-tools']` - Set if you're running X 
-* `node['vmware-tools']['esx_version']` - Should correspond to directories seen here: http://packages.vmware.com/tools/esx/index.html
-* `node['vmware-tools']['repo_base_url']` - ESX versions seen here: http://packages.vmware.com/tools/esx/
-* `node['vmware-tools']['gpg_key_url']` - URL for the repo's gpg key.  Default is set to VMWare's.  Leave default unless you're using you're own yum repo
+### vmware-tools::default
 
-Usage
------
-#### vmware-tools::default
-The default recipe will install vmware-tools from source downloaded from a web server that you specify.  
+The default recipe will install [open-vm-tools](https://github.com/vmware/open-vm-tools) of on a CentOS/Debian based machine. If you run this on Windows it install the public VMware Tools executable from https://packages.vmware.com.
 
-##### Example Role:
+If you have a specific place you want to install your Windows based VMware Tools from, override the `default['vmware-tools']['url']` and `default['vware-tools']['version']` in the default attributes.
 
-```ruby
-name "vmware-tools_role"
-description "vmware-tools install"
-run_list [
-    "recipe[vmware-tools]",
-    ]
+## Testing
 
-default_attributes(
-  "vmware-tools" => {
-    "url" => "http://yourserver.local/vmware/latest-tools.tgz",
-    "version" => "9.4.0"
-  }
-)
+For more details look at the [TESTING.md](./TESTING.md).
+
+## License & Authors
+
+If you would like to see the detailed LICENCE click [here](./LICENCE).
+
+- Author: JJ Asghar <jj@chef.io>
+- Author: https://github.com/andrewfraley/
+
+```text
+Copyright:: JJ Asghar
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
-
-#### vmware-tools::rpm
-This recipe will install vmware-tools from VMWare's yum repo.  Do not include the default recipe if using this recipe.
-
-##### Example Role:
-
-```ruby
-name "vmware-tools-rpm_role"
-description "vmware-tools rpm install"
-run_list [
-    "recipe[vmware-tools::rpm]",
-    ]
- # Note you don't need to set any attributes
-```
-
-
-Contributing
-------------
-
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
-
-License and Authors
--------------------
-- Authors: https://github.com/andrewfraley/
-- Github URL: https://github.com/andrewfraley/vmware-tools
-

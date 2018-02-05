@@ -1,0 +1,6 @@
+.direnv/
+.envrc
+vsphere-automation-sdk-ruby/
+Gemfile.lock
+Berksfile.lock
+.kitchen/

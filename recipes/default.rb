@@ -2,34 +2,24 @@
 # Cookbook Name:: vmware-tools
 # Recipe:: default
 #
-# Copyright 2013, YOUR_COMPANY_NAME
-#
-# All rights reserved - Do Not Redistribute
+# Copyright 2018, JJ Asghar
 #
 
-
-
-installed_version = `ver=\`vmware-toolbox-cmd -v\`;  ver=${ver%.*}; echo $ver`
-
-ark 'vmware-tools' do
-  url node['vmware-tools']['url']
-  path node['vmware-tools']['src_path']
-  action :put
+if 'debian' == node['platform_family']
+  include_recipe "apt"
 end
 
-execute 'build-vmware-tools' do
-  command "#{node['vmware-tools']['src_path']}/vmware-tools/vmware-install.pl --default"
+case node['platform_family']
+when 'debian'
 
-  if installed_version 
-    if node['vmware-tools']['upgrade_only']
-      # Only install if version specified is greater than version installed
-       not_if { Gem::Version.new(installed_version) >= Gem::Version.new(node['vmware-tools']['version']) }
-    else
-      # Only install if version is different from the version specified
-      not_if { Gem::Version.new(installed_version) == Gem::Version.new(node['vmware-tools']['version']) }
-    end
-  end
+  package 'open-vm-tools'
+
+when 'rhel', 'fedora'
+
+  package 'open-vm-tools'
+
+when 'windows'
+
+  include_recipe 'vmware-tools::_windows'
 
 end
-
-
