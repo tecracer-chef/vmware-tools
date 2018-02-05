@@ -1,10 +1,10 @@
-name             'vmwaretools'
+name             'vmware-tools'
 maintainer       'JJ Asghar'
 maintainer_email 'jj@chef.io'
-license          'Apache 2'
+license          'Apache-2.0'
 description      'Installs/Configures vmware-tools'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.0.0'
+version          '1.0.1'
 
 depends        'apt'
 depends	       'yum'
