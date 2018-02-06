@@ -10,7 +10,16 @@ remote_file "#{Chef::Config['file_cache_path']}/VMware-tools.exe" do
   action :create_if_missing
 end
 
-execute 'install the application' do
-  command "#{Chef::Config['file_cache_path']}/VMware-tools.exe /s /v'/qn reboot=r'"
-  creates 'C:\\Program Files\\VMware\\VMware Tools\\vmtoolsd.exe'
+unless "#{node['vmware-tools']['windows_reboot']}" == false
+  execute 'install the application' do
+    command 'C:\\chef\\cache\\VMware-tools.exe /s /v"/qn REBOOT=R"'
+    creates 'C:\\Program Files\\VMware\\VMware Tools\\vmtoolsd.exe'
+  end
+
+else
+  execute 'install the application' do
+    command 'C:\\chef\\cache\\VMware-tools.exe /s /v"/qn"'
+    creates 'C:\\Program Files\\VMware\\VMware Tools\\vmtoolsd.exe'
+  end
+
 end
