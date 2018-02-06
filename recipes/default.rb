@@ -10,13 +10,15 @@ if 'debian' == node['platform_family']
 end
 
 case node['platform_family']
-when 'debian'
+when 'debian','rhel', 'fedora'
 
-  package 'open-vm-tools'
-
-when 'rhel', 'fedora'
-
-  package 'open-vm-tools'
+  unless "#{node['vmware-tools']['update']}" == false
+    package 'open-vm-tools'
+  else
+    package 'open-vm-tools' do
+      action :upgrade
+    end
+  end
 
 when 'windows'
 
