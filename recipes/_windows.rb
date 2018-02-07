@@ -10,7 +10,7 @@ remote_file "#{Chef::Config['file_cache_path']}/VMware-tools.exe" do
   action :create_if_missing
 end
 
-unless "#{node['vmware-tools']['windows_reboot']}" == false
+if "#{node['vmware-tools']['windows_reboot']}" == false
   windows_package 'VMware-tools' do
     source "#{Chef::Config['file_cache_path']}/VMware-tools.exe"
     returns [0,1618,1641,3010]
