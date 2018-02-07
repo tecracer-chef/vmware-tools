@@ -6,9 +6,10 @@ Chef cookbook for installing [VMware tools](https://docs.vmware.com/en/VMware-To
 
 ## Attributes
 
-`default['vmware-tools']['update']` - default set to `true`, you know you want the newest _always_.
-`default['vmware-tools']['url']` - The location to get the Windows VMware-Tools executable from.
-`default['vmware-tools']['version']` - The version of the Windows VMware-Tool.
+- `default['vmware-tools']['update']` - default set to `true`, you know you want the newest _always_.
+- `default['vmware-tools']['windows_reboot]` - default set to `true`, and if put at the first cookbook you'll reboot then run the rest of the `run_list`.
+- `default['vmware-tools']['url']` - The location to get the Windows VMware-Tools executable from.
+- `default['vmware-tools']['version']` - The version of the Windows VMware-Tool.
 
 ## Usage
 

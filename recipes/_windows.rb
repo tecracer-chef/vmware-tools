@@ -10,7 +10,28 @@ remote_file "#{Chef::Config['file_cache_path']}/VMware-tools.exe" do
   action :create_if_missing
 end
 
-execute 'install the application' do
-  command "#{Chef::Config['file_cache_path']}/VMware-tools.exe /s /v'/qn reboot=r'"
-  creates 'C:\\Program Files\\VMware\\VMware Tools\\vmtoolsd.exe'
+if "#{node['vmware-tools']['windows_reboot']}" == false
+  package 'VMware Tools' do
+    source "#{Chef::Config['file_cache_path']}/VMware-tools.exe"
+    installer_type :custom
+    options  '/s /v"/qn REBOOT=R"'
+    returns [0,1618,1641,3010]
+    action :install
+  end
+
+else
+  package 'VMware Tools' do
+    source "#{Chef::Config['file_cache_path']}/VMware-tools.exe"
+    installer_type :custom
+    options  '/s /v"/qn REBOOT=R"'
+    returns [0,1618,1641,3010]
+    action :install
+    notifies :reboot_now, 'reboot[Restart Computer]', :immediately
+  end
+
+  reboot 'Restart Computer' do
+    action :nothing
+    reason 'Needs to reboot after installing VMware-tools'
+    delay_mins 1
+  end
 end
