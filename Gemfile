@@ -5,6 +5,7 @@ gem 'chef-sugar'
 gem 'kitchen-dokken'
 gem 'kitchen-inspec'
 gem 'kitchen-vcenter'
+gem 'kitchen-vra'
 gem 'test-kitchen'
 
 group :development do

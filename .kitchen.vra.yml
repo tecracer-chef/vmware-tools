@@ -1,0 +1,41 @@
+---
+driver:
+  name: vra
+  username: vraadmin
+  password: <%= ENV['VRAADMIN_PASSWORD'] %>
+  tenant: <%= ENV['VRAADMIN_TENANT'] %>
+  base_url: <%= ENV['BASE_URL'] %>
+  verify_ssl: false
+  subtenant_id: <%= ENV['VRAADMIN_TENANT'] %>
+
+provisioner:
+  name: chef_zero
+  sudo_command: sudo
+  retry_on_exit_code:
+    - 35 # 35 is the exit code signaling that the node is rebooting
+  max_retries: 2
+  wait_for_retry: 90
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7
+    driver:
+      catalog_id: "a42bde94-1e2f-44ca-b79b-dbd1a13cb676"
+    transport:
+      username: "root"
+      password: admini
+
+  - name: windows2012R2
+    driver:
+      catalog_id: "034b0da2-2e18-4519-b99b-6e8f3ecc706a"
+      request_timeout: 3600
+    transport:
+      username: "Administrator"
+      password: "Admini@"
+
+suites:
+  - name: default
+    run_list:
+      - recipe[vmware-tools::default]
