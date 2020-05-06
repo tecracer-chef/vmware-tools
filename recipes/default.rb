@@ -7,7 +7,7 @@
 include_recipe 'apt' if platform_family?('debian') # rubocop:disable ChefModernize/IncludingAptDefaultRecipe
 
 case node['platform_family']
-when 'debian', 'rhel', 'fedora'
+when 'debian', 'rhel', 'fedora', 'amazon'
 
   if node['vmware-tools']['update']
     package 'open-vm-tools'

@@ -17,6 +17,16 @@ transport:
 platforms:
   - name: amazon
   - name: amazon2
+  - name: centos-6
+    driver:
+      image_id: ami-0006b52af5c1a1333
+    block_device_mappings:
+      - device_name: /dev/sda1
+        ebs:
+          volume_size: 20
+          delete_on_termination: true
+    transport:
+      username: centos
   - name: centos-7
     driver:
       image_id: ami-0e8286b71b81c3cc1

@@ -20,6 +20,7 @@ verifier:
 platforms:
   - name: amazon
   - name: amazon2
+  - name: centos-6
   - name: centos-7
   - name: centos-8
   - name: debian-9
