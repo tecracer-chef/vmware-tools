@@ -1,9 +1,9 @@
 # encoding: utf-8
 #
-# Cookbook Name:: vmware-tools
+# Cookbook:: vmware-tools
 # Spec:: default
 #
-# Copyright:: 2018, JJ Asghar
+# Copyright:: 2020, tecRacer Opensource, Apache-2.0.
 # The following are only examples, check out https://github.com/chef/inspec/tree/master/docs
 # for everything you can do.
 

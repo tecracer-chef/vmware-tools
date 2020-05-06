@@ -1,6 +1,8 @@
-## TESTING doc
+# TESTING doc
 
-This Cookbook has a dependency. It requires the [vSphere Automation SDK](https://github.com/vmware/vsphere-automation-sdk-ruby) be installed. The steps to do that are as follows, for the time being it's not published to Rubygems, if you are interested please comment [here](https://github.com/vmware/vsphere-automation-sdk-ruby/issues/10).
+This Cookbook has a dependency. It requires the [vSphere Automation SDK](https://github.com/vmware/vsphere-automation-sdk-ruby)
+be installed. The steps to do that are as follows, for the time being it's not
+published to Rubygems, if you are interested please comment [here](https://github.com/vmware/vsphere-automation-sdk-ruby/issues/10).
 
 - `$ git clone` [https://github.com/vmware/vsphere-automation-sdk-ruby.git](https://github.com/vmware/vsphere-automation-sdk-ruby.git)
 - `cd vsphere-automation-sdk-ruby`
@@ -8,7 +10,9 @@ This Cookbook has a dependency. It requires the [vSphere Automation SDK](https:/
 - `chef gem install vsphere-automation-sdk-<version>.gem`
 
 Bundler
--------
+
+---
+
 A ruby environment with Bundler installed is a prerequisite for using
 the testing harness shipped with this cookbook. At the time of this
 writing, it works with Ruby 2.0 and Bundler 1.5.3. All programs
@@ -16,7 +20,9 @@ involved, with the exception of Vagrant, can be installed by cd'ing
 into the parent directory of this cookbook and running "bundle install"
 
 Rakefile
---------
+
+---
+
 The Rakefile ships with a number of tasks, each of which can be ran
 individually, or in groups. Typing "rake" by itself will perform style
 checks with Rubocop and Foodcritic, ChefSpec with rspec, and
@@ -36,34 +42,45 @@ rake travis               # Run all tests on Travis
 ```
 
 Style Testing
--------------
+
+---
 Ruby style tests can be performed by Rubocop by issuing either
+
 ```
 bundle exec rubocop
 ```
+
 or
+
 ```
 rake style:ruby
 ```
 
 Chef style tests can be performed with Foodcritic by issuing either
+
 ```
 bundle exec foodcritic
 ```
+
 or
+
 ```
 rake style:chef
 ```
 
 Spec Testing
--------------
+
+---
+
 Unit testing is done by running Rspec examples. Rspec will test any
 libraries, then test recipes using ChefSpec. This works by compiling a
 recipe (but not converging it), and allowing the user to make
 assertions about the resource_collection.
 
 Integration Testing
--------------------
+
+---
+
 Integration testing is performed by Test Kitchen. Test Kitchen will
 use either the Vagrant driver or various cloud drivers to instantiate
 machines and apply cookbooks. After a successful converge, tests are
@@ -71,30 +88,38 @@ uploaded and ran out of band of Chef. Tests should be designed to
 ensure that a recipe has accomplished its goal.
 
 Integration Testing using Vagrant
----------------------------------
+
+---
+
 Integration tests can be performed on a local workstation using
 Virtualbox or VMWare. Detailed instructions for setting this up can be
 found at the [Bento](https://github.com/chef/bento) project web site.
 
 Integration tests using Vagrant can be performed with either
+
 ```
 bundle exec kitchen test
 ```
+
 or
+
 ```
 rake integration:vagrant
 ```
 
 Integration Testing using Cloud providers
------------------------------------------
+
+---
+
 Integration tests can be performed on cloud providers using
-Test Kitchen plugins. This cookbook ships a ```.kitchen.cloud.yml```
+Test Kitchen plugins. This cookbook ships a `.kitchen.cloud.yml`
 that references environmental variables present in the shell that
-```kitchen test``` is ran from. These usually contain authentication
+`kitchen test` is ran from. These usually contain authentication
 tokens for driving IaaS APIs, as well as the paths to ssh private keys
 needed for Test Kitchen log into them after they've been created.
 
-Examples of environment variables being set in ```~/.bash_profile```:
+Examples of environment variables being set in `~/.bash_profile`:
+
 ```
 # digital_ocean
 export DIGITAL_OCEAN_CLIENT_ID='your_bits_here'
@@ -113,11 +138,14 @@ export SDC_CLI_KEY_ID='your_bits_here'
 ```
 
 Integration tests using cloud drivers can be performed with either
+
 ```
 export KITCHEN_YAML=.kitchen.cloud.yml
 bundle exec kitchen test
 ```
+
 or
+
 ```
 rake integration:cloud
 ```

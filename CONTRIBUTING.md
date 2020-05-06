@@ -4,7 +4,7 @@ Contributing
 Steps
 -----
 
-Thanks for your interest in gelsinger! If you'd like to help out please:
+Thanks for your interest in contributing! If you'd like to help out please:
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)

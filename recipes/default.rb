@@ -1,18 +1,15 @@
 #
-# Cookbook Name:: vmware-tools
+# Cookbook:: vmware-tools
 # Recipe:: default
 #
-# Copyright 2018, JJ Asghar
-#
+# Copyright:: 2020, tecRacer Opensource, Apache-2.0.
 
-if 'debian' == node['platform_family']
-  include_recipe "apt"
-end
+include_recipe 'apt' if platform_family?('debian') # rubocop:disable ChefModernize/IncludingAptDefaultRecipe
 
 case node['platform_family']
-when 'debian','rhel', 'fedora'
+when 'debian', 'rhel', 'fedora'
 
-  unless "#{node['vmware-tools']['update']}" == false
+  if node['vmware-tools']['update']
     package 'open-vm-tools'
   else
     package 'open-vm-tools' do
