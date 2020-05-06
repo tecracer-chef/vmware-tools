@@ -3,7 +3,7 @@ driver:
   name: dokken
   # because Docker and SystemD/Upstart
   privileged: true
-  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+  chef_version: 15.0
   env: [CHEF_LICENSE=accept]
 
 transport:
@@ -11,6 +11,13 @@ transport:
 
 provisioner:
   name: dokken
+  multiple_converge: 2
+  enforce_idempotency: false
+  retry_on_exit_code:
+    - 35 # 35 is the exit code signaling that the node is rebooting
+    - 1
+  max_retries: 2
+  wait_for_retry: 360
 
 platforms:
   - name: amazon
@@ -52,6 +59,11 @@ platforms:
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
 
+  - name: opensuse-leap-15
+    driver:
+      image: dokken/opensuse-leap-15
+      pid_one_command: /bin/systemd
+
   - name: ubuntu-16.04
     driver:
       image: dokken/ubuntu-16.04
@@ -72,8 +84,3 @@ platforms:
       pid_one_command: /bin/systemd
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
-
-  - name: opensuse-leap-15
-    driver:
-      image: dokken/opensuse-leap-15
-      pid_one_command: /bin/systemd

@@ -3,7 +3,7 @@ maintainer 'tecRacer Opensource'
 maintainer_email 'opensource@tecracer.de'
 license 'Apache-2.0'
 description 'Installs/Configures vmware-tools'
-version '2.2.0'
+version '3.0.0'
 
 chef_version '>= 15.0'
 

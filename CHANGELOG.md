@@ -1,9 +1,17 @@
 # Changelog
 
-## [2.2.0] -
+## [3.0.0] - 2020-05-06
 
-* added kitchen vra config
-* update a lot of things
+* update minimum required chef version to 15.0 (BREAKING CHANGE)
+* update metadata.rb with new contents
+* update attributes + recipe files with style fixes
+* update changelog, contributing, readme and testing
+* add GitHub templates for bugs and pull requests
+* add GitHub Actions for linting and kitchen test
+* add Codeowners
+* add kitchen configs for ec2, dokken, vra
+* rename .kitchen files to kitchen
+* remove .ruby-version
 
 ## [2.1.0] - 2018-05-21
 

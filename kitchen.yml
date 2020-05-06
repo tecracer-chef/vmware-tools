@@ -5,7 +5,7 @@ driver:
 provisioner:
   name: chef_zero
   product_name: chef
-  product_version: 12
+  product_version: 15
   multiple_converge: 2
   enforce_idempotency: false
   retry_on_exit_code:
