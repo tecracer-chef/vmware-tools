@@ -21,10 +21,10 @@ depends 'yum'
 
 # Supported OS
 supports 'amazon'
-supports 'centos', '>= 6'
-supports 'debian', '>= 9'
+supports 'centos', '>= 6.0'
+supports 'debian', '>= 9.0'
 supports 'opensuse'
 supports 'redhat'
 supports 'suse'
 supports 'ubuntu', '>= 16.04'
-supports 'windows', '>= 2012'
+supports 'windows', '>= 2012.0'
