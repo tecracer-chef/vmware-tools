@@ -1,0 +1,59 @@
+---
+driver:
+  name: ec2
+  subnet_id: '<%= ENV['K_AWS_SUBNET_ID'] %>'
+  security_group_ids: <%= ENV['K_AWS_SG_IDS'] %>
+  iam_profile_name: '<%= ENV['K_AWS_IAM_PROFILE_NAME'] %>'
+  interface: <%= ENV['K_AWS_INTERFACE'] || 'public' %>
+  associate_public_ip: <%= ENV['K_AWS_ASSOCIATE_PUBLIC_IP'] || true %>
+  region: <%= ENV['K_AWS_REGION'] || 'eu-central-1' %>
+  tags:
+    Name: test-kitchen
+    CreatedBy: test-kitchen
+
+transport:
+  ssh_key: ~/.ssh/id_rsa-kitchen
+
+platforms:
+  - name: amazon
+  - name: amazon2
+  - name: centos-6
+    driver:
+      image_id: ami-0006b52af5c1a1333
+    block_device_mappings:
+      - device_name: /dev/sda1
+        ebs:
+          volume_size: 20
+          delete_on_termination: true
+    transport:
+      username: centos
+  - name: centos-7
+    driver:
+      image_id: ami-0e8286b71b81c3cc1
+    block_device_mappings:
+      - device_name: /dev/sda1
+        ebs:
+          volume_size: 20
+          delete_on_termination: true
+    transport:
+      username: centos
+  - name: rhel-77
+    driver:
+      image_id: ami-06220be3176081cf0
+    block_device_mappings:
+      - device_name: /dev/sda1
+        ebs:
+          volume_size: 20
+          delete_on_termination: true
+    transport:
+      connection_retries: 20
+      connection_retry_sleep: 6
+      connection_timeout: 30
+  - name: ubuntu-16.04
+    driver:
+      image_id: ami-0bad2b43a871348da
+  - name: ubuntu-18.04
+    driver:
+      image_id: ami-0e342d72b12109f91
+  - name: windows-2016
+  - name: windows-2019

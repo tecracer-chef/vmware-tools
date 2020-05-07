@@ -1,0 +1,29 @@
+name: kitchen-test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  dokken:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['amazon2', 'centos-7', 'centos-8', 'debian-9', 'debian-10', 'opensuse-leap-15', 'ubuntu-1604', 'ubuntu-1804', 'ubuntu-2004']
+        suite: ['default']
+      fail-fast: false
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Install Chef
+        uses: actionshub/chef-install@master
+      - name: Run test-kitchen
+        run: |
+          kitchen test ${SUITE}-${OS} -d always
+        env:
+          SUITE: ${{matrix.suite}}
+          OS: ${{matrix.os}}
+          CHEF_LICENSE: accept-no-persist
+          KITCHEN_LOCAL_YAML: kitchen.dokken.yml

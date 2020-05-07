@@ -1,0 +1,36 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+  product_name: chef
+  product_version: 15.0
+  multiple_converge: 2
+  enforce_idempotency: false
+  retry_on_exit_code:
+    - 35 # 35 is the exit code signaling that the node is rebooting
+    - 1
+  max_retries: 2
+  wait_for_retry: 360
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: amazon
+  - name: amazon2
+  - name: centos-6
+  - name: centos-7
+  - name: centos-8
+  - name: debian-9
+  - name: debian-10
+  - name: opensuse-leap-15
+  - name: ubuntu-16.04
+  - name: ubuntu-18.04
+  - name: ubuntu-20.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[vmware-tools::default]

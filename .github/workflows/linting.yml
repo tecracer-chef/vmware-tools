@@ -1,0 +1,27 @@
+name: linting
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  cookstyle:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Install Chef
+      uses: actionshub/chef-install@master
+    - name: Run cookstyle
+      run: cookstyle
+      env:
+        CHEF_LICENSE: accept-no-persist
+  mdl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Run Markdown Lint
+        uses: actionshub/markdownlint@master
