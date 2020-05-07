@@ -8,8 +8,8 @@ driver:
   associate_public_ip: <%= ENV['K_AWS_ASSOCIATE_PUBLIC_IP'] || true %>
   region: <%= ENV['K_AWS_REGION'] || 'eu-central-1' %>
   tags:
-    Name: GitHub-Action-test-kitchen
-    CreatedBy: GitHub-Action-test-kitchen
+    Name: test-kitchen
+    CreatedBy: test-kitchen
 
 transport:
   ssh_key: ~/.ssh/id_rsa-kitchen

@@ -4,7 +4,8 @@ driver:
   # because Docker and SystemD/Upstart
   privileged: true
   chef_version: 15.0
-  env: [CHEF_LICENSE=accept]
+  env:
+    CHEF_LICENSE: accept-no-persist
 
 transport:
   name: dokken

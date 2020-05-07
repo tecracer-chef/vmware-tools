@@ -15,15 +15,15 @@ jobs:
         suite: ['default']
       fail-fast: false
     steps:
-    - name: Check out code
-      uses: actions/checkout@master
-    - name: Install Chef
-      uses: actionshub/chef-install@master
-    - name: Run test-kitchen
-      run: |
-        kitchen test ${SUITE}-${OS} -d always
-      env:
-        SUITE: ${{matrix.suite}}
-        OS: ${{matrix.os}}
-        CHEF_LICENSE: accept-no-persist
-        KITCHEN_LOCAL_YAML: kitchen.dokken.yml
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Install Chef
+        uses: actionshub/chef-install@master
+      - name: Run test-kitchen
+        run: |
+          kitchen test ${SUITE}-${OS} -d always
+        env:
+          SUITE: ${{matrix.suite}}
+          OS: ${{matrix.os}}
+          CHEF_LICENSE: accept-no-persist
+          KITCHEN_LOCAL_YAML: kitchen.dokken.yml

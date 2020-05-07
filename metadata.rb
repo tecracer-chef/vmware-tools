@@ -21,7 +21,7 @@ depends 'yum'
 
 # Supported OS
 supports 'amazon'
-supports 'centos', '~> 7'
+supports 'centos', '>= 6'
 supports 'debian', '>= 9'
 supports 'opensuse'
 supports 'redhat'
