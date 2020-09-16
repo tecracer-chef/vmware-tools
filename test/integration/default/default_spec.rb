@@ -17,6 +17,11 @@ elsif os[:family] == 'redhat'
     it { should be_installed }
   end
 
+elsif os[:family] == 'amazon'
+  describe package('open-vm-tools') do
+    it { should be_installed }
+  end
+
 elsif os[:family] == 'windows'
   describe file('C:\\Program Files\\VMware\\VMware Tools') do
     its('type') { should eq :directory }
